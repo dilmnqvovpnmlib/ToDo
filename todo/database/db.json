@@ -2,11 +2,23 @@
   "todos": [
     {
       "id": 1,
-      "title": "JSON ServerでダミーAPIを作成"
+      "title": "JSON Serverでmock serverの作成"
     },
     {
       "id": 2,
-      "title": "Vue.jsで基本機能を実装"
+      "title": "Reactの環境構築とcreate app"
+    },
+    {
+      "id": 3,
+      "title": "componentでfetch"
+    },
+    {
+      "id": 4,
+      "title": "ToDo管理機能を実装"
+    },
+    {
+      "id": 4,
+      "title": "光通信の研究"
     }
   ]
 }

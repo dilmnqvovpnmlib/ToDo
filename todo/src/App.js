@@ -1,26 +1,88 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TodoList from './components/TodoList'
+import Header from './components/Header'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super()
+    this.facebookUrl = 'https://facebook.github.io/react-native/movies.json'
+    this.mockUrl = "http://localhost:3001/todos"
+    this.state = {
+      loading: false,
+      movies: [],
+      todos: [],
+    }
+  }
+
+  componentWillMount() {
+    // this.fetchFacebook()
+    this.fetchMock()
+  }
+
+  fetchFacebook() {
+    return fetch(this.facebookUrl)
+      .then(response => response.json())
+      .then(responseJson =>
+        this.setState({
+          loading: true,
+          movies: responseJson.movies,
+          title:  responseJson.title
+        })
+      )
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  fetchMock() {
+    return fetch(this.mockUrl)
+      .then(response => response.json())
+      .then(responseJson =>
+        this.setState({
+          loading: true,
+          todos: responseJson
+        })
+      )
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  render() {
+    if(this.state.loading){
+      console.log(this.state.todos)
+      return(
+        // facebook用
+        // <div className="App-header">
+        //   <p>{ this.state.title }</p>
+        // </div>
+        // mock用
+        // <div className="App-header">
+        //   <p>{ this.state.title }</p>
+        // </div>
+        <div>
+          <Header></Header>
+          <ul>
+            {this.state.todos.map(data => {
+              return <li key={ data.id }>{ data.title }</li>
+            })}
+
+            <TodoList todo={this.state}></TodoList>
+          </ul>
+        </div>
+      );
+    }else{
+      return(
+        <div>
+          <Header></Header>
+          <div className="App-header">
+            <p>Loading...</p>
+          </div>
+        </div>
+      );
+    }
+  }
 }
 
 export default App;
