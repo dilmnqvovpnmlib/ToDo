@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
-
 import { withRouter } from 'react-router';
 
 
@@ -103,7 +102,7 @@ class TodoList extends React.Component {
 		)
 
 		return (
-			<table border="1" >
+			<table border="1" align="center">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -126,8 +125,10 @@ class TodoList extends React.Component {
     return(
 			<div>
 				<br></br>
-				<h2>Todo一覧</h2>
-				{ this.renderTable(data) }
+				<h2 align="center">Todo一覧</h2>
+				<div>
+				{this.renderTable(data)}
+				</div>
 			</div>
     );
   }

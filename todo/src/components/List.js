@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList'
 
+import '../static/css/create.css';
 
 class List extends React.Component {
   constructor() {
@@ -33,7 +34,7 @@ class List extends React.Component {
   render() {
 			if(this.state.loading){
 				return(
-					<div>
+					<div style={{textAlign: "center"}}>
 						<TodoList todo={this.state}></TodoList>
 					</div>
 				);

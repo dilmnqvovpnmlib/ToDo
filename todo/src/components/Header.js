@@ -11,10 +11,10 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import List from './List'
-import Create from './Create'
+
 import Top from './Top'
-import Detail from './Detail'
+import Create from './Create'
+import List from './List'
 import Update from './Update'
 
 
@@ -38,9 +38,6 @@ class Header extends React.Component {
           <Switch>
             <Route path="/list">
               <List />
-            </Route>
-            <Route path="/detail">
-              <Detail />
             </Route>
             <Route path="/create">
               <Create></Create>
