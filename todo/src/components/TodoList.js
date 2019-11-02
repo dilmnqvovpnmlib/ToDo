@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
 
+import { withRouter } from 'react-router';
+
 
 class TodoList extends React.Component {
 	constructor() {
@@ -10,6 +12,8 @@ class TodoList extends React.Component {
 			showDeleteModal: false,
 			deleteId: '',
 			deleteTitle: '',
+			updateID: '',
+			updateTitle: ''
 		}
 		this.UPDATE_CODE = 0
 		this.DELETE_CODE = 1
@@ -21,8 +25,12 @@ class TodoList extends React.Component {
 		this.delete = this.delete.bind(this)
 	}
 
-	openUpdateModal() {
-		this.setState({ showUpdateModal: true })
+	openUpdateModal(id, title) {
+		this.setState({
+			showUpdateModal: true,
+			updateID: id,
+			updateTitle: title
+		})
 	}
 
 	closeModal(type) {
@@ -58,6 +66,13 @@ class TodoList extends React.Component {
 		this.setState({ showDeleteModal: false })
 	}
 
+	handleToUpdatePage = (item) => {
+    this.props.history.push({
+			pathname: '/update',
+			state: {item: item}
+		})
+  }
+
 	renderTable(data) {
 		console.log(data.todo.todos);
 		var rows = data.todo.todos.map(item => 
@@ -67,22 +82,10 @@ class TodoList extends React.Component {
 				<td>{ item.status }</td>
 				<td>{ item.user }</td>
 				<td>
-					<Button variant="success" onClick={() => this.openUpdateModal()}>編集</Button>
+					<Button variant="success" onClick={() => this.handleToUpdatePage(item)}>編集</Button>
 					<span>&nbsp;</span>
 					<Button variant="danger" onClick={() => this.openDeleteModal(item.id, item.title)}>削除</Button>
 
-					<Modal show={this.state.showUpdateModal} onHide={() => this.closeModal(this.UPDATE_CODE)} style={{textAlign: "left"}}>
-						<Modal.Header closeButton>
-							<Modal.Title>Todo編集画面</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							<h3>test test</h3>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={this.update}>はい</Button>
-							<Button onClick={() => this.closeModal(this.UPDATE_CODE)}>いいえ</Button>
-						</Modal.Footer>
-					</Modal>
 					<Modal show={this.state.showDeleteModal} onHide={() => this.closeModal(this.DELETE_CODE)}>
 						<Modal.Header closeButton>
 							<Modal.Title>Todo削除画面</Modal.Title>
@@ -100,7 +103,7 @@ class TodoList extends React.Component {
 		)
 
 		return (
-			<table  border="1" >
+			<table border="1" >
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -130,4 +133,4 @@ class TodoList extends React.Component {
   }
 }
 
-export default TodoList
+export default withRouter(TodoList)

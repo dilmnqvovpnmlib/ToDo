@@ -14,6 +14,9 @@ import {
 import List from './List'
 import Create from './Create'
 import Top from './Top'
+import Detail from './Detail'
+import Update from './Update'
+
 
 class Header extends React.Component {
 
@@ -36,8 +39,14 @@ class Header extends React.Component {
             <Route path="/list">
               <List />
             </Route>
+            <Route path="/detail">
+              <Detail />
+            </Route>
             <Route path="/create">
-              <Create />
+              <Create></Create>
+						</Route>
+            <Route path="/update">
+              <Update />
             </Route>
             <Route path="/">
               <Top />

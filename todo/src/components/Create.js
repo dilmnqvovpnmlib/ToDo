@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Form, Col, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 import '../static/css/create.css';
 
@@ -25,7 +25,7 @@ class Create extends React.Component {
     this.postTodos = this.postTodos.bind(this)
   }
 
-  handleToAboutPage = () => {
+  handleToListPage = () => {
     this.props.history.push('/list')
   }
 
@@ -44,7 +44,7 @@ class Create extends React.Component {
         })
       })
       .then(() => {
-        this.handleToAboutPage()
+        this.handleToListPage()
       })
       .catch(error => {
         console.error(error);

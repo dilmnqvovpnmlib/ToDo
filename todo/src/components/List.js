@@ -14,7 +14,6 @@ class List extends React.Component {
 
 	componentWillMount() {
 		this.fetchMock()
-		//this.deleteMock()
 	}
 	
 	fetchMock() {
