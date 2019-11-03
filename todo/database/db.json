@@ -49,12 +49,6 @@
       "id": 8
     },
     {
-      "title": "aiueo",
-      "user": "Kiwata",
-      "status": "進行中",
-      "id": 10
-    },
-    {
       "title": "宿題",
       "user": "Kiwata",
       "status": "未着手",
@@ -101,6 +95,12 @@
       "user": "Hikaru",
       "status": "完了",
       "id": 20
+    },
+    {
+      "title": "学祭へ行く",
+      "user": "Mi",
+      "status": "進行中",
+      "id": 21
     }
   ]
 }

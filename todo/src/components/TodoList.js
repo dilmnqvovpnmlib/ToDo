@@ -5,6 +5,19 @@ import { withRouter } from 'react-router';
 class TodoList extends React.Component {
 	constructor() {
 		super()
+		this.status = [
+      {'label': '未着手', 'value': 'wating'},
+      {'label': '進行中', 'value': 'doing'},
+      {'label': '完了', 'value': 'done'}
+    ]
+		this.UPDATE_CODE = 0
+		this.DELETE_CODE = 1
+		this.mockUrl = 'http://localhost:3001/todos/'
+		this.closeModal = this.closeModal.bind(this)
+		this.openDeleteModal = this.openDeleteModal.bind(this)
+		this.deleteTask = this.deleteTask.bind(this)
+		this.delete = this.delete.bind(this)
+		
 		this.state = {
 			showUpdateModal: false,
 			showDeleteModal: false,
@@ -13,14 +26,6 @@ class TodoList extends React.Component {
 			updateID: '',
 			updateTitle: ''
 		}
-		this.UPDATE_CODE = 0
-		this.DELETE_CODE = 1
-		this.mockUrl = 'http://localhost:3001/todos/'
-		this.closeModal = this.closeModal.bind(this)
-
-		this.openDeleteModal = this.openDeleteModal.bind(this)
-		this.deleteTask = this.deleteTask.bind(this)
-		this.delete = this.delete.bind(this)
 	}
 
 	handleToUpdatePage = (item) => {
@@ -71,8 +76,22 @@ class TodoList extends React.Component {
 		this.setState({ showDeleteModal: false })
 	}
 
+	sortGetData(data) {
+		var sortedData = []
+		for(var item in this.status) {
+			for(let index in data.todo.todos) {
+				var targetData = data.todo.todos[index]
+				if(this.status[item].label === targetData.status) {
+					sortedData.push(targetData)
+				}
+			}
+		}
+		return sortedData
+	}
+
 	renderTable(data) {
-		var rows = data.todo.todos.map(item => 
+		var sortData = this.sortGetData(data)
+		var rows = sortData.map(item => 
 			<tr key={ item.id }>
 				<td>{ item.id }</td>
 				<td>{ item.title }</td>
@@ -89,6 +108,7 @@ class TodoList extends React.Component {
 						</Modal.Header>
 						<Modal.Body>
 							<h3>{this.state.deleteId} {this.state.deleteTitle}</h3>
+							<h3>このTodoを削除しますか？</h3>
 						</Modal.Body>
 						<Modal.Footer>
 							<Button onClick={this.delete}>はい</Button>
