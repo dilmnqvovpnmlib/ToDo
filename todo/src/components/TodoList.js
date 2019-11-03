@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap'
 import { withRouter } from 'react-router';
 
-
 class TodoList extends React.Component {
 	constructor() {
 		super()
@@ -23,6 +22,13 @@ class TodoList extends React.Component {
 		this.deleteTask = this.deleteTask.bind(this)
 		this.delete = this.delete.bind(this)
 	}
+
+	handleToUpdatePage = (item) => {
+    this.props.history.push({
+			pathname: '/update',
+			state: {item: item}
+		})
+  }
 
 	openUpdateModal(id, title) {
 		this.setState({
@@ -65,15 +71,7 @@ class TodoList extends React.Component {
 		this.setState({ showDeleteModal: false })
 	}
 
-	handleToUpdatePage = (item) => {
-    this.props.history.push({
-			pathname: '/update',
-			state: {item: item}
-		})
-  }
-
 	renderTable(data) {
-		console.log(data.todo.todos);
 		var rows = data.todo.todos.map(item => 
 			<tr key={ item.id }>
 				<td>{ item.id }</td>
@@ -106,14 +104,14 @@ class TodoList extends React.Component {
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>タイトル </th>
+						<th>タイトル</th>
 						<th>状態</th>
 						<th>作成者</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					{ rows }
+					{rows}
 				</tbody>
 			</table>
 		)
@@ -127,7 +125,7 @@ class TodoList extends React.Component {
 				<br></br>
 				<h2 align="center">Todo一覧</h2>
 				<div>
-				{this.renderTable(data)}
+					{this.renderTable(data)}
 				</div>
 			</div>
     );

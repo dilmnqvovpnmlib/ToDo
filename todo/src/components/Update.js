@@ -1,9 +1,8 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { Button } from 'react-bootstrap'
+import { withRouter } from 'react-router';
 
 import '../static/css/create.css';
-
 
 class Update extends React.Component {
   constructor(props) {
@@ -13,6 +12,9 @@ class Update extends React.Component {
       {'label': '進行中', 'value': 'doing'},
       {'label': '完了', 'value': 'done'}
     ]
+    this.mockUrl = 'http://localhost:3001/todos/'
+    this.handleChange = this.handleChange.bind(this)
+    this.updateTodos = this.updateTodos.bind(this)
 
     this.state = {
       id: this.props.location.state.item.id,
@@ -20,18 +22,12 @@ class Update extends React.Component {
       user: this.props.location.state.item.user,
       status: this.props.location.state.item.status,
     }
-
-    this.mockUrl = 'http://localhost:3001/todos/'
-    this.handleChange = this.handleChange.bind(this)
-    this.updateTodos = this.updateTodos.bind(this)
   }
 
-  handleToListPage = () => {
-    this.props.history.push('/list')
-  }
+  handleToListPage = () => this.props.history.push('/list')
 
   updateTodos(todoId) {
-    if (this.state.value !== '') {
+    if (this.state.title !== '' && this.state.user !== '' && this.state.status !== '') {
       fetch(this.mockUrl + todoId, {
         method: 'PUT',
         headers: {
@@ -64,15 +60,13 @@ class Update extends React.Component {
   }
 
   render() {
-    var item = this.props.location.state.item
-    console.log(item)
     return(
       <div>
         <br></br>
         <div style={{textAlign: "center"}}>
-        <h2>Todo編集画面</h2>
-        <form>
-          <ul>
+          <h2>Todo編集画面</h2>
+          <form>
+            <ul>
               <li>
                 <label>Todo名</label>
                 <input id="title" type="text" value={this.state.title} onChange={this.handleChange} style={{width: "200px"}} />
@@ -87,9 +81,10 @@ class Update extends React.Component {
                   {this.status.map(status => <option value={status.label}>{status.label}</option>)}
                 </select>
               </li>
-          </ul>
-          <Button onClick={() => this.updateTodos(this.state.id)} size="lg">編集</Button>
-        </form>
+              <Button onClick={() => this.updateTodos(this.state.id)} size="lg">編集</Button>
+              <span>&nbsp;</span>
+              <Button onClick={() => this.updateTodos(this.state.id)} size="lg">戻る</Button></ul>
+          </form>
         </div>
       </div>
     );

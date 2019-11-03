@@ -1,25 +1,23 @@
 import React from 'react';
 import { 
-  Navbar,
-  Nav,
   Button,
-  FormControl,
   Form,
+  FormControl,
+  Nav,
+  Navbar,
 } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
+  Switch,
 } from "react-router-dom";
 
-import Top from './Top'
 import Create from './Create'
 import List from './List'
+import Top from './Top'
 import Update from './Update'
 
-
 class Header extends React.Component {
-
   render() {
     return(
       <div>
@@ -36,12 +34,12 @@ class Header extends React.Component {
             </Form>
           </Navbar>
           <Switch>
-            <Route path="/list">
-              <List />
-            </Route>
             <Route path="/create">
               <Create></Create>
 						</Route>
+            <Route path="/list">
+              <List />
+            </Route>
             <Route path="/update">
               <Update />
             </Route>

@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap'
 
 import '../static/css/create.css';
 
-
 class Create extends React.Component {
   constructor() {
     super()
@@ -13,24 +12,21 @@ class Create extends React.Component {
       {'label': '進行中', 'value': 'doing'},
       {'label': '完了', 'value': 'done'}
     ]
+    this.mockUrl = 'http://localhost:3001/todos/'
+    this.handleChange = this.handleChange.bind(this)
+    this.postTodos = this.postTodos.bind(this)
 
     this.state = {
       title: '',
       user: '',
       status: this.status[0].label,
     }
-
-    this.mockUrl = 'http://localhost:3001/todos/'
-    this.handleChange = this.handleChange.bind(this)
-    this.postTodos = this.postTodos.bind(this)
   }
 
-  handleToListPage = () => {
-    this.props.history.push('/list')
-  }
+  handleToListPage = () => this.props.history.push('/list')
 
   postTodos() {
-    if (this.state.value !== '') {
+    if (this.state.title !== '' && this.state.user !== '') {
       fetch(this.mockUrl, {
         method: 'POST',
         headers: {

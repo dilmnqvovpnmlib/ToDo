@@ -14,10 +14,10 @@ class List extends React.Component {
 	}
 
 	componentWillMount() {
-		this.fetchMock()
+		this.getTodos()
 	}
 	
-	fetchMock() {
+	getTodos() {
     return fetch(this.mockUrl)
       .then(response => response.json())
       .then(responseJson =>
@@ -32,21 +32,21 @@ class List extends React.Component {
 	}
 	
   render() {
-			if(this.state.loading){
-				return(
-					<div style={{textAlign: "center"}}>
-						<TodoList todo={this.state}></TodoList>
+		if(this.state.loading){
+			return(
+				<div style={{textAlign: "center"}}>
+					<TodoList todo={this.state}></TodoList>
+				</div>
+			);
+		}else{
+			return(
+				<div>
+					<div className="App-header">
+						<p>Loading...</p>
 					</div>
-				);
-			}else{
-				return(
-					<div>
-						<div className="App-header">
-							<p>Loading...</p>
-						</div>
-					</div>
-				);
-			}
+				</div>
+			);
+		}
   }
 }
 
