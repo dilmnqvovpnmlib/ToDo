@@ -1,21 +1,21 @@
-.center{
-	text-align: center;
+.center {
+  text-align: center;
 }
 
 /*formのデザイン*/
 ul li {
-	list-style: none;
+  list-style: none;
 }
 
 label {
-	width: 150px;
-	font-size: 24px
+  width: 150px;
+  font-size: 24px;
 }
 
 input {
-	width: 200px;
+  width: 200px;
 }
 
 select {
-	margin-left: %
+  margin-left: 0%;
 }

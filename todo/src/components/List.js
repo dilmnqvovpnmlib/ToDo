@@ -1,23 +1,23 @@
-import React from 'react';
-import TodoList from './TodoList'
+import React from "react";
+import TodoList from "./TodoList";
 
-import '../static/css/create.css';
+import "../static/css/create.css";
 
 class List extends React.Component {
   constructor() {
-    super()
-    this.mockUrl = "http://localhost:3001/todos"
+    super();
+    this.mockUrl = "http://localhost:3001/todos";
     this.state = {
       loading: false,
-      todos: [],
-    }
-	}
+      todos: []
+    };
+  }
 
-	componentWillMount() {
-		this.getTodos()
-	}
-	
-	getTodos() {
+  componentWillMount() {
+    this.getTodos();
+  }
+
+  getTodos() {
     return fetch(this.mockUrl)
       .then(response => response.json())
       .then(responseJson =>
@@ -29,25 +29,25 @@ class List extends React.Component {
       .catch(error => {
         console.error(error);
       });
-	}
-	
+  }
+
   render() {
-		if(this.state.loading){
-			return(
-				<div style={{textAlign: "center"}}>
-					<TodoList todo={this.state}></TodoList>
-				</div>
-			);
-		}else{
-			return(
-				<div>
-					<div className="App-header">
-						<p>Loading...</p>
-					</div>
-				</div>
-			);
-		}
+    if (this.state.loading) {
+      return (
+        <div style={{ textAlign: "center" }}>
+          <TodoList todo={this.state}></TodoList>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div className="App-header">
+            <p>Loading...</p>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
-export default List
+export default List;
